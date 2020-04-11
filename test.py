@@ -230,7 +230,7 @@ for k in range(1,11):
         for pe in range(n_periodes-1):
             liste_prix = remplirListePrix2(pe,k)
 
-            listeDemandes = scen.simuler(pe, liste_prix)
+            listeDemandes, tab_notes = scen.simuler(pe, liste_prix)
             for plat in range(n_plat):
                 state[plat] -= listeDemandes[plat]
                 a = 0

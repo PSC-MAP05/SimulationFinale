@@ -16,9 +16,9 @@ class modelfree:
         for i in range(self.k):
             self.liste_Prix = np.append(self.liste_Prix, (self.pmin + i * pas))
 
-        self.qvalues = [[[0 for k in range(len(self.liste_Prix))] for i in range(self.Stock_beg+1)] for j in range(self.Nb_States)]
-        self.sigma = 0.5
-        self.gamma = 1
+        self.qvalues = [[[1 for k in range(len(self.liste_Prix))] for i in range(self.Stock_beg+1)] for j in range(self.Nb_States)]
+        self.sigma = 0.1
+        self.gamma = 0.5
 
     def updateQ(self,s,a, s_p):
         time_beg = s[0]
@@ -29,9 +29,7 @@ class modelfree:
         reward = (stock_beg-stock_end)*self.liste_Prix[a]
 
 
-
         Vopt,argmax  = self.findArgmax(s_p)
-
         self.qvalues[time_beg][stock_beg][a] = (1-self.sigma)*self.qvalues[time_beg][stock_beg][a] + self.sigma*(reward+self.gamma*Vopt)
 
     def findArgmax(self,s):

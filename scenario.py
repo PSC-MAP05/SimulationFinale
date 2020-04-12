@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 from scipy.special import ndtr
 class scenario:
-    def __init__(self, n_utilisateurs, n_periodes, n_plat, matrice_notes):
+    def __init__(self, n_utilisateurs, n_periodes, n_plat, matrice_notes, matrice_Rank):
 
 
         self.n_utilisateurs = n_utilisateurs
@@ -21,7 +21,7 @@ class scenario:
 
         self.tab_consom_potentiel = [i for i in range(n_utilisateurs)]
         self.matrice_notes = matrice_notes
-
+        self.matrice_Rank = matrice_Rank
     # fonction qui à une période donnée retourne le paramètre de la loi de poisson
     # vérifier que ce paramètre ne déborde pas
     def tiragePoisson(self,periode):
@@ -105,12 +105,18 @@ class scenario:
                     resultat +=2
                     resultat%=3
                     """
+        #nombre el est le nombre d'items dans la reocmmandation
+    def rankTorec(self, ranking):
+
+        return (np.exp(-ranking))*5
+
+    def findRank(self, plat, utilisateur):
+        return self.matrice_Rank[utilisateur][plat]
+
+    def z(self,classe, gout_plat, ranking_plat):
 
 
-    def z(self,classe, gout_plat):
-
-
-        return 0.1*(classe+1) *(gout_plat+1)
+        return 0.05*(classe+1) *(gout_plat +1)*(self.rankTorec(ranking_plat)+1)
 
     """def remplir_prix(self,tab_prix,jr):
         for i in range(len(tab_prix[0])):
@@ -150,9 +156,13 @@ class scenario:
 
             for plat in range(self.n_plat):
                # gout_plat = self.g(i, extremite_low, extremite_high, plat)
+
+               #trouver le ranking
+                ranking = self.findRank(plat,i)
+
                 gout_plat = self.matrice_notes[i][plat]
                 liste_notes[plat] = gout_plat
-                propension[plat] = np.random.exponential(scale=(self.z(classe, gout_plat + 0.5)))
+                propension[plat] = np.random.exponential(scale=(self.z(classe, gout_plat + 0.5,ranking)))
 
             plat = self.argmaxCritere(propension, liste_prix, per)
 

@@ -83,7 +83,7 @@ class mdp():
         tab_prix = np.zeros((self.Nb_States, self.Stock_beg+1))
 
         for i in range(1, self.Stock_beg+1):
-            tab_int[self.Nb_States - 1][i] = -5000
+            tab_int[self.Nb_States - 1][i] = 0
         tab_int[self.Nb_States - 1][0] = 0
 
         for i in range(self.Nb_States - 2, -1, -1):

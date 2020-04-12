@@ -5,23 +5,23 @@ import mdp
 import math
 import numpy as np
 import modelfree
-
+import matrice_note
 import matplotlib.pyplot as plt
 
 n_periodes =10
-n_clients = 10000
-n_jours_training = 500
+n_clients = 100
+n_jours_training = 2000
 n_jours_simu = 10
-n_plat = 1
+n_plat = 3
 liste_prix = []
-stock_beg = 30
+stock_beg = 100
 pmin= 1.
-pmax = 10.
-k = 5
+pmax = 20.
+k = 20
 
-epsilon = 0.2
+epsilon = 0.1
 liste_MDP = []
-
+matrice = matrice_note.genererMatrice(n_clients,n_plat)
 liste_prix_possible = [i for i in range(1,11)]
 for i in range(n_plat):
 
@@ -47,11 +47,12 @@ for i in range(n_jours_training):
     revenu = 0
     liste_prix = [0 for i in range(n_plat)]
     state = [stock_beg for i in range(n_plat)]
-    scen = scenario.scenario(n_clients, n_periodes, n_plat)
+    scen = scenario.scenario(n_clients, n_periodes, n_plat,matrice_notes=matrice)
+
     for pe in range(n_periodes-1):
         liste_indice = remplir_indice(state,pe)
-        liste_prix = [liste_MDP[i].liste_Prix[liste_indice[i]] for i in range(n_plat)]
-        listeDemandes = scen.simuler(pe, liste_prix)
+        liste_prix = [liste_MDP[i].liste_Prix[1] for i in range(n_plat)]
+        listeDemandes, tab_notes = scen.simuler(pe, liste_prix)
         for plat in range(n_plat):
             b = state[plat]
 

@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 import NEW_CLASS
 import matrice_note
+
 n_periodes =24
 n_clients = 1000
 n_jours_training = 100
@@ -94,13 +95,11 @@ for i in range(n_clients):
 
 M = data.factorisation(n_clients, n_plat)
 moyenne_rang=matrice_note.rang_moyen(matrice_note.mat_to_rank2(M,n_plat,n_plat),n_plat)
-matrice_Rank = matrice_note.mat_to_rank2(M,n_plat,n_plat)
-
 
 for i in range(n_jours_training):
     print("Jour ", i)
     state = [stock_beg for i in range(n_plat)]
-    scen = scenario.scenario(n_clients, n_periodes, n_plat, vraie_matrice_note, matrice_Rank)
+    scen = scenario.scenario(n_clients, n_periodes, n_plat, vraie_matrice_note)
 
     tab_ranking = []
     for pe in range(n_periodes-1):
@@ -140,7 +139,7 @@ for i in range(n_jours_training):
             matrice.add(elmement)"""
     M = data.factorisation(n_clients, n_plat)
     moyenne_rang=matrice_note.rang_moyen(matrice_note.mat_to_rank2(M,n_plat,n_plat),n_plat)
-    matrice_Rank = matrice_note.mat_to_rank2(M,n_plat,n_plat)
+
 #for i in range(len(listePrixFinal)):
 
  #   for plat in range(n_plat):
@@ -158,7 +157,7 @@ compteur = compteur/(n_clients*n_plat)"""
 for i in range(n_jours_simu):
     print("Jour ", i)
     state = [stock_beg for i in range(n_plat)]
-    scen = scenario.scenario(n_clients, n_periodes,n_plat, vraie_matrice_note, matrice_Rank)
+    scen = scenario.scenario(n_clients, n_periodes,n_plat, vraie_matrice_note)
 
     coeff = regression.regresser(liste_tab_X, regression.fonctiondeRegression(liste_tab_Y))
     print(coeff)
@@ -182,7 +181,7 @@ for i in range(n_jours_simu):
     liste_MDP[0].printMDPprice()
     M = data.factorisation(n_clients, n_plat)
     moyenne_rang = matrice_note.rang_moyen(matrice_note.mat_to_rank2(M, n_plat, n_plat), n_plat)
-    matrice_Rank = matrice_note.mat_to_rank2(M, n_plat, n_plat)
+
     for pe in range(n_periodes-1):
 
 
@@ -228,7 +227,7 @@ for k in range(1,11):
     for i in range(n_jours_validations):
         print("Jour ", i)
         state = [stock_beg for i in range(n_plat)]
-        scen = scenario.scenario(n_clients, n_periodes, n_plat, vraie_matrice_note, matrice_Rank)
+        scen = scenario.scenario(n_clients, n_periodes, n_plat, vraie_matrice_note)
         for pe in range(n_periodes-1):
             liste_prix = remplirListePrix2(pe,k)
 
@@ -242,7 +241,6 @@ for k in range(1,11):
                     a = listeDemandes[plat]
                 state[plat] = max(0, state[plat])
                 listeRevenusFinal[k-1][plat].append(a*liste_prix[plat])
-
 
         # rajouter la partie NOTES....
 

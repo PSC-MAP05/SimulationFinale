@@ -30,5 +30,5 @@ def regresser(tab_X, tab_Y):
     tab_temp = [[abs(tab_X[i][0]-12),tab_X[i][1], tab_X[i][2]] for i in range(len(tab_X))]
 
     model = LinearRegression().fit(tab_temp,tab_Y)
-
+    print(model.score(tab_temp, tab_Y))
     return np.append(np.array([model.intercept_]),model.coef_)

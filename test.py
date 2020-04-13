@@ -35,7 +35,7 @@ for i in range(n_plat):
 
     state = 0
     print("HOP UN DE FAIT")
-    #là le MDP est rempli avec toutes les valeurs disponibles
+   
 
 
 listeDemandesFinal = []  #va nous permettre de faire les régressions etc.
@@ -66,8 +66,7 @@ def remplirListePrix2(pe,m):
     for i in range(n_plat):
         liste[i] =m
     return liste
-#PARTIE SIMULATION DES PREMIERES PERIODES AVEC PRIX AU HASARD
-#définir listePRIX
+
 
 
 liste_tab_Y = []
@@ -127,15 +126,15 @@ for i in range(n_jours_training):
 
 
 
-        # rajouter la partie NOTES....
+     
 
 
         listePrixFinal.append([pe]+liste_prix)
 
-        # revoir cette ligne
+       
         listeDemandesFinal.append(listeDemandes)
         liste_prix = remplirListePrix(pe)
-        # problème, PRENDRE EN COMPTE LE TEMPS
+        
         """for element in tab_notes:
             matrice.add(elmement)"""
     M = data.factorisation(n_clients, n_plat)
@@ -244,12 +243,7 @@ for k in range(1,11):
                 listeRevenusFinal[k-1][plat].append(a*liste_prix[plat])
 
 
-        # rajouter la partie NOTES....
-
-
-        # revoir cette ligne
-
-        # problème, PRENDRE EN COMPTE LE TEMPS
+     
 
 print("revenus phase training")
 for i in range(len(listeRevenus1)):

@@ -52,8 +52,7 @@ class mdp():
         demande = self.Demand(i, prix)
         proba = special.ndtr(((j-l)+1-demande)/ self.var_demande) - special.ndtr((j-l-demande)/ self.var_demande)
         return proba
-        # coder une densité ayant son maximum en Demand
-        # retourner la probabilité
+        
 
 
     def reward(self,i,j,prix,m,l):

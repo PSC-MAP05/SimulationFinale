@@ -213,10 +213,8 @@ for i in range(n_jours_simu):
         #rajouter la partie NOTES....
         listePrixFinal.append(liste_prix)
 
-        #revoir cette ligne
         listeDemandesFinal.append(listeDemandes)
 
-        #problème, PRENDRE EN COMPTE LE TEMPS
 print(liste_tab_X)
 print(liste_tab_Y)
 

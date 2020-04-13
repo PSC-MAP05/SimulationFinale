@@ -22,13 +22,10 @@ class scenario:
         self.tab_consom_potentiel = [i for i in range(n_utilisateurs)]
         self.matrice_notes = matrice_notes
         self.matrice_Rank = matrice_Rank
-    # fonction qui à une période donnée retourne le paramètre de la loi de poisson
-    # vérifier que ce paramètre ne déborde pas
+   
     def tiragePoisson(self,periode):
-       # coeff =  # je comprends pas ce que tu fais ....
-        # je suppose que lambda est tiré selon une loi uniforme entre des bornes variables
-        # pour que lambda soit plus grand à 22H qu'à 20H.
-        # OOK
+      
+      
         a = (-abs(periode-12)+ 12)*10
         b= 1
 
@@ -60,7 +57,7 @@ class scenario:
 
         return argmax
 
-    #pour savoir si riche ou pauvre
+
 
 
     def f(self,i, n):
@@ -74,7 +71,7 @@ class scenario:
         k = n/self.n_plat
         for i in range(0,n,int(n/self.n_plat)):
             return i*int(self.n_plat/n), i, i + int(n/self.n_plat) """
-    #pour avoir  le gout?
+   
 
     def g(self,i, e_low, e_high,p):
         i = i-e_low
@@ -105,7 +102,7 @@ class scenario:
                     resultat +=2
                     resultat%=3
                     """
-        #nombre el est le nombre d'items dans la reocmmandation
+       
     def rankTorec(self, ranking):
 
         return (np.exp(-ranking))*5

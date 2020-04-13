@@ -70,8 +70,7 @@ def remplirListePrix2(pe,m):
         nb=abs(m+6*np.random.random()-1)
         liste[i] = nb
     return liste
-#PARTIE SIMULATION DES PREMIERES PERIODES AVEC PRIX AU HASARD
-#définir listePRIX
+
 liste_tab_Y = [[] for i in range(n_plat)]
 liste_tab_X = [[] for i in range(n_plat)]
 listeRevenus1 = [[] for i in range(n_plat)]
@@ -97,13 +96,13 @@ for i in range(n_jours_training):
             state[plat] = max(0, state[plat])
             listeRevenus1[plat].append(a*liste_prix[plat])
 
-        # rajouter la partie NOTES....
+      
         listePrixFinal.append([pe]+liste_prix)
 
         # revoir cette ligne
         listeDemandesFinal.append(listeDemandes)
         liste_prix = remplirListePrix(pe)
-        # problème, PRENDRE EN COMPTE LE TEMPS
+        
         """for element in tab_notes:
             matrice.add(elmement)"""
 
@@ -159,10 +158,8 @@ for i in range(n_jours_simu):
             liste_tab_Y[plat].append(listeDemandes[plat])
 
             liste_prix[plat] = liste_MDP[plat].findPrice([pe, state[plat]])
-        #rajouter la partie NOTES....
         listePrixFinal.append(liste_prix)
 
-        #revoir cette ligne
         listeDemandesFinal.append(listeDemandes)
 
         #problème, PRENDRE EN COMPTE LE TEMPS
@@ -191,12 +188,9 @@ for k in range(1,11):
                 state[plat] = max(0, state[plat])
                 listeRevenusFinal[k-1][plat].append(a*liste_prix[plat])
 
-        # rajouter la partie NOTES....
 
 
-        # revoir cette ligne
 
-        # problème, PRENDRE EN COMPTE LE TEMPS
 
 print("revenus phase training")
 for i in range(len(listeRevenus1)):
